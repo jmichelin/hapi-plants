@@ -1,0 +1,44 @@
+{
+  "name": "hapi-plants",
+  "description": "Access to a large plants database made easy",
+  "main": "server.js",
+  "version": "0.0.0-semantically-released",
+  "scripts": {
+    "test:watch": "mocha src/server.test.js -w",
+    "test": "mocha src/server.test.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "commit": "git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hapi-plants/hapi-plants.git"
+  },
+  "keywords": [
+    "plants",
+    "api",
+    "hapi"
+  ],
+  "author": "John Michelin <john@javascriptjohn.com> (http://www.javascriptjohn.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hapi-plants/hapi-plants/issues"
+  },
+  "homepage": "https://github.com/hapi-plants/hapi-plants#readme",
+  "devDependencies": {
+    "chai": "3.5.0",
+    "commitizen": "2.8.6",
+    "cz-conventional-changelog": "1.2.0",
+    "mocha": "3.1.2",
+    "open": "0.0.5",
+    "request": "2.75.0",
+    "semantic-release": "^4.3.5"
+  },
+  "dependencies": {
+    "express": "4.14.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}
