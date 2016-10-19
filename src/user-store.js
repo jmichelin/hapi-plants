@@ -22,12 +22,21 @@ exports.register = function (server, options, next){
       callback(err, user);
     });
   };
-  const updateUser = function(userInfo, callback) {
-    const userId = userInfo.userId;
-    const user = {
-      id: userId,
-      details: userInfo.userDetails
-    };
+  const updateUser = function(userId, details, callback) {
+    store.get(userId, function (err, user) {
+      if (err) {
+        callback(err, user);
+      }
+      let updateUser = {};
+      updateUser.id = userId;
+      updateUser.details = Object.assign({}, user.details, details);
+      store.put(userId, updateUser, (err) => {
+        callback(err, updateUser);
+      });
+    });
+  };
+  const deleteUser = function (userId, callback) {
+    return store.del(userId, callback);
   };
   server.route([
     {
@@ -43,7 +52,8 @@ exports.register = function (server, options, next){
             return reply(user);
           });
         },
-        description: 'Retrieve a user'
+        description: 'Retrieve a user',
+        tags: ['api']
       }
     },
     {
@@ -59,7 +69,8 @@ exports.register = function (server, options, next){
             return reply(user);
           });
         },
-        description: 'Create a user'
+        description: 'Create a user',
+        tags: ['api']
       }
     },
     {
@@ -68,20 +79,41 @@ exports.register = function (server, options, next){
       config: {
         handler: function (request, reply) {
           const userInfo = request.payload;
-          updateUser(userInfo, (err, user) => {
+          let userId = request.params.userId;
+          updateUser(userId, userInfo, (err, user) => {
             if(err) {
               return reply(Boom.badRequest(err));
             }
             return reply(user);
           });
         },
-        description: 'Update a user'
+        description: 'Update a user',
+        tags: ['api']
+      }
+    },
+    {
+      method: 'DELETE',
+      path: '/user/{userId}',
+      config: {
+        handler: function (request, reply) {
+          let userId = request.params.userId;
+          deleteUser(userId, (err) => {
+            if(err) {
+              return reply(Boom.badRequest(err));
+            }
+            return reply(`User information for ${userId} has been deleted`);
+          });
+        },
+        description: 'Delete a user',
+        tags: ['api']
       }
     }
   ]);
   server.expose({
     getUser: getUser,
-    createUser: createUser
+    createUser: createUser,
+    updateUser: updateUser,
+    deleteUser: deleteUser
   });
   return next();
 };
