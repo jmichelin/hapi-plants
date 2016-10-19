@@ -10,12 +10,4 @@ describe('Server Basic Features', function () {
       expect(response.statusCode).to.equal(200);
     });
   });
-
-    it("Should return Hello World", function () {
-      request(url, function (error, response, body) {
-        console.log('body', body);
-        expect(body).to.equal('Hello World');
-      });
-    });
-
 });
