@@ -1,10 +1,11 @@
 'use strict';
 const Hapi = require('hapi');
 const Blipp = require('blipp');
+const HapiLevel = require('hapi-level');
+const UserStore = require('./user-store')
 const Hello = require('./hello');
 const server = new Hapi.Server();
 require('dotenv').config();
-
 
 server.connection({
   port: process.env.PORT,
@@ -12,8 +13,14 @@ server.connection({
 });
 
 server.register([
-  { register: Hello, options: {} },
-  Blipp
+    {
+      register: HapiLevel, options: {
+        config: { valueEncoding: 'json' }
+      }
+    },
+    { register: Hello, options: {} },
+    UserStore,
+    Blipp
   ],
   {
     routes: {
