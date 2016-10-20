@@ -38,6 +38,7 @@
     "semantic-release": "^4.3.5"
   },
   "dependencies": {
+    "bell": "8.3.0",
     "blipp": "2.3.0",
     "dotenv": "2.0.0",
     "express": "4.14.0",
