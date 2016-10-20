@@ -6,6 +6,8 @@
   "scripts": {
     "test:watch": "mocha src/server.test.js -w",
     "test": "mocha src/server.test.js",
+    "test:hapi": "./node_modules/lab/bin/lab -c -t 100git  ./test/index.js",
+    "test:hapif": "./node_modules/lab/bin/lab -c -t 100 --lint ./test/index.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "commit": "git-cz"
   },
@@ -26,8 +28,10 @@
   "homepage": "https://github.com/hapi-plants/hapi-plants#readme",
   "devDependencies": {
     "chai": "3.5.0",
+    "code": "4.0.0",
     "commitizen": "2.8.6",
     "cz-conventional-changelog": "1.2.0",
+    "lab": "11.1.0",
     "mocha": "3.1.2",
     "open": "0.0.5",
     "request": "2.75.0",
