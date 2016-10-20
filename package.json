@@ -6,7 +6,7 @@
   "scripts": {
     "test:watch": "mocha src/server.test.js -w",
     "test": "mocha src/server.test.js",
-    "test:hapi": "./node_modules/lab/bin/lab -c -t 100git  ./test/index.js",
+    "test:hapi": "./node_modules/lab/bin/lab -c -t 100  ./test/index.js",
     "test:hapif": "./node_modules/lab/bin/lab -c -t 100 --lint ./test/index.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "commit": "git-cz"
